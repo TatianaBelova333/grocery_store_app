@@ -47,7 +47,7 @@ class NameBaseModel(models.Model):
                 name=self.name,
             ).exists():
                 raise ValidationError(
-                    {"name": "Данное название уже существует."}
+                    {'name': 'Данное название уже существует.'}
                 )
 
     def save(self, *args, **kwargs):
@@ -63,8 +63,8 @@ class Category(NameBaseModel):
     '''Product category model.'''
 
     class Meta(NameBaseModel.Meta):
-        verbose_name = "Категория"
-        verbose_name_plural = "Категории"
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class Subcategory(NameBaseModel):
@@ -77,8 +77,8 @@ class Subcategory(NameBaseModel):
     )
 
     class Meta(NameBaseModel.Meta):
-        verbose_name = "Подкатегория"
-        verbose_name_plural = "Подкатегории"
+        verbose_name = 'Подкатегория'
+        verbose_name_plural = 'Подкатегории'
 
     def display_categories(self, delimiter='<br>'):
         category_queryset = self.categories.all()
@@ -88,4 +88,4 @@ class Subcategory(NameBaseModel):
 
         return format_html(categories)
 
-    display_categories.short_description = "Категории"
+    display_categories.short_description = 'Категории'
