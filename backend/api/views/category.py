@@ -1,4 +1,4 @@
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from api.serializers import CategorySerializer
 
 from category.models import Category

@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_display = (
         'id',
-        'name', 
+        'name',
         'subcategory',
         'description',
         'unit_price',
