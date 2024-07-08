@@ -3,16 +3,18 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import CategoryViewset, ProductViewset
+from api.views import CategoryViewset, CustomUserViewSet, ProductViewset
 
 app_name = 'api'
- #User = get_user_model()
 
 router_v1 = DefaultRouter()
+router_v1.register('users', CustomUserViewSet, basename='users')
 router_v1.register('categories', CategoryViewset, basename='categories')
 router_v1.register('products', ProductViewset, basename='products')
 
 urlpatterns = [
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
     path('', include(router_v1.urls)),
 ]
 

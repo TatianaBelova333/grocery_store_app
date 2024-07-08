@@ -1,13 +1,19 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth import get_user_model
 
+from category.models import DatesModelMixin
 from products.models import Product
 
 
-User = get_user_model()
+class User(AbstractUser):
+    '''User Class.'''
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
 
-class ShoppingCart(models.Model):
+class ShoppingCart(DatesModelMixin):
     '''ShoppingCart model.'''
     user = models.OneToOneField(
         User,
@@ -21,8 +27,6 @@ class ShoppingCart(models.Model):
         verbose_name='Товары',
         related_name='shopping_carts',
     )
-    # toal_price = 
-    #created #updated
 
     class Meta:
         verbose_name = 'Корзина'
@@ -48,13 +52,13 @@ class CartItem(models.Model):
     quantity = models.PositiveSmallIntegerField(
         verbose_name='Количество',
     )
-    total_price = models.DecimalField(
-        verbose_name='Цена',
-        max_digits=8,
-        decimal_places=2,
-        # validators=(MinValueValidator(limit_value=0),)
-    )
 
     class Meta:
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'
+        constraints = [
+            models.UniqueConstraint(
+                fields=('shopping_cart', 'product'),
+                name='unique_cart_product',
+            )
+        ]

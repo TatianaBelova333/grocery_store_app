@@ -1,10 +1,12 @@
+from decimal import Decimal
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from category.models import NameBaseModel, Subcategory
+from category.models import DatesModelMixin, NameBaseModel, Subcategory
 
 
-class Product(NameBaseModel):
+class Product(NameBaseModel, DatesModelMixin):
     '''Product model.'''
     class MeaurementUnit(models.TextChoices):
         KG = ('кг', 'кг')
@@ -38,15 +40,23 @@ class Product(NameBaseModel):
         choices=MeaurementUnit.choices,
         default=MeaurementUnit.PC,
     )
-    in_stock = models.BooleanField(
-        verbose_name='В наличии',
-        default=False,
-    )
     quantity = models.PositiveSmallIntegerField(
         verbose_name='Количество',
         default=0,
     )
+    # country
+    # branc
 
     class Meta(NameBaseModel.Meta):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+
+    def is_in_stock(self):
+        return bool(self.quantity > 0)
+
+    def discounted_price(self):
+        return Decimal((self.unit_price)*(100 - self.discount)/100)
+
+    discounted_price.short_description = 'Цена со скидкой'
+    is_in_stock.short_description = 'В наличии'
+    is_in_stock.boolean = True

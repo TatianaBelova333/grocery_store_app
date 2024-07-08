@@ -12,6 +12,8 @@ class CategoryAdmin(admin.ModelAdmin):
         'name',
         'slug',
         'image',
+        'created',
+        'updated',
     )
 
 
@@ -25,4 +27,6 @@ class CaSubcategoryAdmin(admin.ModelAdmin):
         'slug',
         'image',
         'display_categories',
+        'created',
+        'updated',
     )
