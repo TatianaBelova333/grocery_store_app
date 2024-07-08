@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 
 from products.models import Product
 
@@ -10,14 +12,26 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
-        'subcategory',
+        'subcategory_link',
         'description',
+        'unit',
         'unit_price',
         'discount',
-        'in_stock',
+        'discounted_price',
+        'is_in_stock',
         'quantity',
-        'unit',
+        'created',
+        'updated',
     )
     list_filter = (
         'subcategory',
     )
+
+    def subcategory_link(self, obj):
+        subcategory = obj.subcategory
+        url = reverse(
+            'admin:category_subcategory_changelist'
+        ) + str(subcategory.id)
+        return format_html(f'<a href="{url}">{subcategory}</a>')
+
+    subcategory_link.short_description = 'Подкатегория'

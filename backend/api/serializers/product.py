@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from category.models import Category
 
+from category.models import Category
 from products.models import Product
 
 
@@ -33,6 +33,9 @@ class ProductSerializer(serializers.ModelSerializer):
         many=True,
     )
     subcategory = ProductSubCatSerializer()
+    in_cart = serializers.BooleanField()
+    discounted_price = serializers.DecimalField(max_digits=8, decimal_places=2)
+    discount = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -43,7 +46,12 @@ class ProductSerializer(serializers.ModelSerializer):
             'categories',
             'subcategory',
             'unit_price',
+            'discounted_price',
+            'discount',
             'unit',
-            'in_stock',
             'quantity',
+            'in_cart',
         )
+
+    def get_discount(self, obj):
+        return f'{obj.discount}%'

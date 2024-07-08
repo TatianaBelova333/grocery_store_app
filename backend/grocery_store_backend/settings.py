@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -26,12 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
     'django_filters',
+    'djoser',
 
     'category',
     'api',
     'products',
-    'shopping_carts',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -91,8 +94,23 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
+DJOSER = {
+    'SERIALIZERS': {
+         'user_create': 'api.serializers.UserRegistrationSerializer',
+         'cart': 'api.serializers.ShoppingCartSerializer',
+    },
+}
+
+AUTH_USER_MODEL = "users.User"
 LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'

@@ -4,6 +4,25 @@ from django.utils.html import format_html
 from pytils.translit import slugify
 
 
+class DatesModelMixin(models.Model):
+    """Базовая модель для классов с датой соаздания/обновления."""
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания',
+        db_index=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Дата обновления',
+        db_index=True,
+    )
+
+    class Meta:
+        abstract = True
+        ordering = ("-updated",)
+
+
 class NameBaseModel(models.Model):
     '''Abstract model for classes with name field.'''
 
@@ -35,20 +54,18 @@ class NameBaseModel(models.Model):
         return self.name
 
     def clean(self):
-        '''Capitalize the name and check its uniqueness.'''
-
-        self.name = self.name.capitalize()
+        '''Case-insensitive check if the name is unique.'''
 
         instance_exists = self.__class__.objects.filter(pk=self.pk).first()
 
         if (not instance_exists or
-                instance_exists.name != self.name):
+                instance_exists.name.lower() != self.name.lower()):
             if self.__class__.objects.filter(
                 name=self.name,
             ).exists():
                 raise ValidationError(
-                    {'name': 'Данное название уже существует.'}
-                )
+                    {"name": "Данное название уже сущуествует."}
+            )
 
     def save(self, *args, **kwargs):
         '''Generata a slug value before saving.'''
@@ -59,7 +76,7 @@ class NameBaseModel(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Category(NameBaseModel):
+class Category(NameBaseModel, DatesModelMixin):
     '''Product category model.'''
 
     class Meta(NameBaseModel.Meta):
@@ -67,7 +84,7 @@ class Category(NameBaseModel):
         verbose_name_plural = 'Категории'
 
 
-class Subcategory(NameBaseModel):
+class Subcategory(NameBaseModel, DatesModelMixin):
     '''Product subcategory model.'''
 
     categories = models.ManyToManyField(
