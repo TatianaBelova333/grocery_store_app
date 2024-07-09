@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.html import format_html
 from pytils.translit import slugify
 
+from category.utils import images_directory_path
+
 
 class DatesModelMixin(models.Model):
     """Базовая модель для классов с датой соаздания/обновления."""
@@ -32,19 +34,6 @@ class NameBaseModel(models.Model):
         unique=True,
         db_index=True,
     )
-    slug = models.SlugField(
-        'slug',
-        max_length=200,
-        unique=True,
-        blank=True,
-    )
-    image = models.ImageField(
-        'Избражение',
-        upload_to='category/images/',
-        null=True,
-        blank=True,
-        default=None,
-    )
 
     class Meta:
         abstract = True
@@ -65,7 +54,24 @@ class NameBaseModel(models.Model):
             ).exists():
                 raise ValidationError(
                     {"name": "Данное название уже сущуествует."}
-            )
+                )
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
+
+
+class SlugBaseModel(NameBaseModel):
+    '''Abstract model for classes with slug field.'''
+    slug = models.SlugField(
+        'slug',
+        max_length=200,
+        unique=True,
+        blank=True,
+    )
+
+    class Meta:
+        abstract = True
 
     def save(self, *args, **kwargs):
         '''Generata a slug value before saving.'''
@@ -76,7 +82,21 @@ class NameBaseModel(models.Model):
         return super().save(*args, **kwargs)
 
 
-class Category(NameBaseModel, DatesModelMixin):
+class BaseImage(models.Model):
+    '''Image base model.'''
+
+    image = models.ImageField(
+        upload_to=images_directory_path,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        abstract = True
+        default_related_name = "images"
+
+
+class Category(SlugBaseModel, BaseImage, DatesModelMixin):
     '''Product category model.'''
 
     class Meta(NameBaseModel.Meta):
@@ -84,7 +104,7 @@ class Category(NameBaseModel, DatesModelMixin):
         verbose_name_plural = 'Категории'
 
 
-class Subcategory(NameBaseModel, DatesModelMixin):
+class Subcategory(SlugBaseModel, BaseImage, DatesModelMixin):
     '''Product subcategory model.'''
 
     categories = models.ManyToManyField(

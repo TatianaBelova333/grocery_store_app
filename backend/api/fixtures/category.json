@@ -1,0 +1,112 @@
+[
+{
+  "model": "category.category",
+  "pk": 1,
+  "fields": {
+    "created": "2024-07-08T17:49:24.867Z",
+    "updated": "2024-07-08T17:49:24.867Z",
+    "name": "Готовая еда",
+    "slug": "gotovaya-eda",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 2,
+  "fields": {
+    "created": "2024-07-08T17:49:40.656Z",
+    "updated": "2024-07-08T17:49:40.656Z",
+    "name": "Фрукты, ягода и орехи",
+    "slug": "fruktyi-yagoda-i-orehi",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 3,
+  "fields": {
+    "created": "2024-07-08T17:49:51.142Z",
+    "updated": "2024-07-08T17:49:51.142Z",
+    "name": "Хлеб и выпечка",
+    "slug": "hleb-i-vyipechka",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 4,
+  "fields": {
+    "created": "2024-07-08T17:50:00.665Z",
+    "updated": "2024-07-08T17:50:00.665Z",
+    "name": "Овощи и зелень",
+    "slug": "ovoschi-i-zelen",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 5,
+  "fields": {
+    "created": "2024-07-08T17:50:11.397Z",
+    "updated": "2024-07-08T17:50:11.397Z",
+    "name": "Замороженные продукты",
+    "slug": "zamorozhennyie-produktyi",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 6,
+  "fields": {
+    "created": "2024-07-08T17:50:18.638Z",
+    "updated": "2024-07-08T17:50:18.638Z",
+    "name": "Мясо и птица",
+    "slug": "myaso-i-ptitsa",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 7,
+  "fields": {
+    "created": "2024-07-08T17:50:29.344Z",
+    "updated": "2024-07-08T17:50:29.344Z",
+    "name": "Сладости",
+    "slug": "sladosti",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 8,
+  "fields": {
+    "created": "2024-07-08T17:50:40.055Z",
+    "updated": "2024-07-08T17:50:40.055Z",
+    "name": "Молочные продукты",
+    "slug": "molochnyie-produktyi",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 9,
+  "fields": {
+    "created": "2024-07-08T17:50:44.836Z",
+    "updated": "2024-07-08T17:50:44.836Z",
+    "name": "Закуски",
+    "slug": "zakuski",
+    "image": ""
+  }
+},
+{
+  "model": "category.category",
+  "pk": 10,
+  "fields": {
+    "created": "2024-07-08T17:51:55.883Z",
+    "updated": "2024-07-08T17:51:55.883Z",
+    "name": "Детское питание",
+    "slug": "detskoe-pitanie",
+    "image": ""
+  }
+}
+]

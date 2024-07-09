@@ -1,0 +1,58 @@
+[
+{
+  "model": "products.brand",
+  "pk": 1,
+  "fields": {
+    "name": "Агуша"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 2,
+  "fields": {
+    "name": "Фрутоняня"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 3,
+  "fields": {
+    "name": "Milka"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 4,
+  "fields": {
+    "name": "Lays"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 5,
+  "fields": {
+    "name": "Чистая линия"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 6,
+  "fields": {
+    "name": "Global Village"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 7,
+  "fields": {
+    "name": "Первый завод"
+  }
+},
+{
+  "model": "products.brand",
+  "pk": 8,
+  "fields": {
+    "name": "Мираторг"
+  }
+}
+]

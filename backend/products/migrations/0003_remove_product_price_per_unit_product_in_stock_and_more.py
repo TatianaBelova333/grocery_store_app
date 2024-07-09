@@ -23,9 +23,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="product",
             name="quantity",
-            field=models.PositiveSmallIntegerField(
-                default=0, verbose_name="Количество"
-            ),
+            field=models.DecimalField(
+                        decimal_places=3, max_digits=6, verbose_name="Количество"
+                    ),
         ),
         migrations.AddField(
             model_name="product",

@@ -49,8 +49,10 @@ class CartItem(models.Model):
         verbose_name='Товар',
         on_delete=models.CASCADE,
     )
-    quantity = models.PositiveSmallIntegerField(
+    quantity = models.DecimalField(
         verbose_name='Количество',
+        max_digits=6,
+        decimal_places=3,
     )
 
     class Meta:
