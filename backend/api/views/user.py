@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from users.models import CartItem, ShoppingCart
+from users.models import ShoppingCart
 
 
 User = get_user_model()
@@ -38,20 +38,9 @@ class CustomUserViewSet(DjoserUserViewSet):
         if self.action == 'cart':
             queryset = ShoppingCart.objects.filter(
                 user=user
-            ).prefetch_related(
-                'items'
-            ).annotate(
-                total=Sum(
-                    (F('items__quantity') * F('items__product__unit_price')
-                     * (100 - F('items__product__discount')) / 100)
-                )
-            ).first()
+            ).prefetch_related('items').first()
             return queryset
-        if self.action == 'update_cart':
-            queryset = CartItem.objects.filter(
-                shopping_cart=user.shopping_cart
-            )
-            return queryset
+
         return super().get_queryset()
 
     @action(["get", "delete", 'patch'],

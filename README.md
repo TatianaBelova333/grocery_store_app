@@ -59,7 +59,7 @@ source env/bin/activate
   ```
 - Заполнить базу тестовыми данными
   ```
-  python3 manage.py loaddata category subcategory country brand
+  python3 manage.py loaddata category subcategory country brand product
   ```
 - Запустить проект
   ```
@@ -204,9 +204,11 @@ Content-Type: application/json
 
 Filter by `subcategory` and `subcategory__categories` or order by `unit_price`, `discoun`t, `created`
 
-`GET /api/categories/?ordering=-created`
+For example:
+`GET /api/products/?ordering=-created`
 
-`GET /api/categories/?category=3`
+Or:
+`GET /api/products/?subcategory=3`
 
 ```
 HTTP/1.1 200 OK
@@ -371,6 +373,7 @@ HTTP/1.1 200 OK
 "Товар добавлен в корзину"
 ```
 
+Attempting to add incorrect quantity:
 
 ```
 POST /api/products/<pk>/to_cart/`
@@ -405,9 +408,20 @@ Content-Type: application/json
 ```
 HTTP/1.1 200 OK
 
-"Кол-во товара изменено."
+"Кол-во товара в корзине изменено."
 ```
 
+### Delete the Product from cart (authorization required)
+
+
+`DELETE /api/products/<pk>/to_cart/`
+
+
+```
+HTTP/1.1 204 No Content
+
+"Товар удален из корзины."
+```
 
 ### Get the current user's shopping cart (authorization required).
 
@@ -447,6 +461,7 @@ Content-Type: application/json
     "total": "35133.65"
 }
 ```
+
 ### Clear the current user's shopping cart (authorization required).
 
 `DELETE /api/users/cart/`

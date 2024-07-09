@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from users.models import User
+from users.models import ShoppingCart, User
 
 
 @admin.register(User)
@@ -29,4 +29,16 @@ class UserAdmin(BaseUserAdmin):
             'last_login',
             'date_joined',
         )}),
+    )
+
+
+@admin.register(ShoppingCart)
+class ShoppingCartAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'id',
+        'user',
+        'is_empty',
+        'created',
+        'updated',
     )

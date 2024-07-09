@@ -1,0 +1,154 @@
+[
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "created": "2024-07-08T17:55:57.197Z",
+    "updated": "2024-07-09T12:35:03.683Z",
+    "name": "Йогурт Агуша, черника",
+    "slug": "jogurt-agusha-chernika",
+    "subcategory": 3,
+    "description": "Детский йогурт Агуша",
+    "unit_price": "48.50",
+    "discount": 10,
+    "unit": "шт",
+    "stock_quantity": "0.000",
+    "country": 1,
+    "brand": 1,
+    "loose": false
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "created": "2024-07-08T17:56:59.874Z",
+    "updated": "2024-07-09T07:53:49.912Z",
+    "name": "Йогурт Агуша, клубника",
+    "slug": "jogurt-agusha-klubnika",
+    "subcategory": 3,
+    "description": "Детский йогурт Агуша",
+    "unit_price": "49.99",
+    "discount": 15,
+    "unit": "шт",
+    "stock_quantity": "20.000",
+    "country": 1,
+    "brand": 1,
+    "loose": false
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "created": "2024-07-08T17:58:29.587Z",
+    "updated": "2024-07-09T12:58:08.577Z",
+    "name": "Томаты, сливка",
+    "slug": "tomatyi-slivka",
+    "subcategory": 6,
+    "description": "Томаты, сливка",
+    "unit_price": "350.90",
+    "discount": 0,
+    "unit": "кг",
+    "stock_quantity": "0.000",
+    "country": 5,
+    "brand": null,
+    "loose": true
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "created": "2024-07-08T17:59:20.780Z",
+    "updated": "2024-07-09T08:43:58.739Z",
+    "name": "Томаты Бычье сердце",
+    "slug": "tomatyi-byiche-serdtse",
+    "subcategory": 6,
+    "description": "Томаты Бычье сердце",
+    "unit_price": "256.90",
+    "discount": 13,
+    "unit": "кг",
+    "stock_quantity": "100.000",
+    "country": 1,
+    "brand": null,
+    "loose": true
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "created": "2024-07-08T18:01:06.802Z",
+    "updated": "2024-07-09T08:43:45.876Z",
+    "name": "Огурцы Global Village",
+    "slug": "ogurtsyi-global-village",
+    "subcategory": 7,
+    "description": "Огурцы Global Village",
+    "unit_price": "320.20",
+    "discount": 0,
+    "unit": "кг",
+    "stock_quantity": "300.000",
+    "country": 1,
+    "brand": 6,
+    "loose": true
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "created": "2024-07-08T18:02:01.067Z",
+    "updated": "2024-07-09T08:43:35.077Z",
+    "name": "Мороженое ванильное Чистая Линия",
+    "slug": "morozhenoe-vanilnoe-chistaya-liniya",
+    "subcategory": 1,
+    "description": "Морожено ванильное Чистая Линия",
+    "unit_price": "89.70",
+    "discount": 35,
+    "unit": "шт",
+    "stock_quantity": "12.000",
+    "country": 1,
+    "brand": 5,
+    "loose": false
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "created": "2024-07-08T18:02:56.073Z",
+    "updated": "2024-07-09T07:53:40.946Z",
+    "name": "Булочка с корицей",
+    "slug": "bulochka-s-koritsej",
+    "subcategory": 4,
+    "description": "Булочка с корицей",
+    "unit_price": "45.50",
+    "discount": 0,
+    "unit": "шт",
+    "stock_quantity": "150.000",
+    "country": 1,
+    "brand": 7,
+    "loose": false
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "created": "2024-07-08T18:05:31.632Z",
+    "updated": "2024-07-09T08:43:53.168Z",
+    "name": "Свинина Мираторг",
+    "slug": "svinina-miratorg",
+    "subcategory": 8,
+    "description": "Свинина Мираторг",
+    "unit_price": "559.90",
+    "discount": 10,
+    "unit": "кг",
+    "stock_quantity": "13.000",
+    "country": 1,
+    "brand": 8,
+    "loose": true
+  }
+}
+]

@@ -138,7 +138,7 @@ class ProductViewset(viewsets.ReadOnlyModelViewSet):
                     )
                 return Response(
                     status=status.HTTP_200_OK,
-                    data='Кол-во товара изменено.',
+                    data='Кол-во товара в корзине изменено.',
                 )
 
             return Response(

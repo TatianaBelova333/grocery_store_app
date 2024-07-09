@@ -1,17 +1,6 @@
 [
 {
   "model": "category.category",
-  "pk": 1,
-  "fields": {
-    "created": "2024-07-08T17:49:24.867Z",
-    "updated": "2024-07-08T17:49:24.867Z",
-    "name": "Готовая еда",
-    "slug": "gotovaya-eda",
-    "image": ""
-  }
-},
-{
-  "model": "category.category",
   "pk": 2,
   "fields": {
     "created": "2024-07-08T17:49:40.656Z",
@@ -103,10 +92,10 @@
   "pk": 10,
   "fields": {
     "created": "2024-07-08T17:51:55.883Z",
-    "updated": "2024-07-08T17:51:55.883Z",
+    "updated": "2024-07-08T21:51:17.612Z",
     "name": "Детское питание",
     "slug": "detskoe-pitanie",
-    "image": ""
+    "image": "detskoe-pitanie/Screenshot_2024-07-08_at_23.45.13.png"
   }
 }
 ]

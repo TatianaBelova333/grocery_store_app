@@ -85,10 +85,10 @@ class Product(SlugBaseModel, DatesModelMixin):
         default=MeaurementUnit.PC,
     )
     stock_quantity = models.DecimalField(
-        verbose_name='Длступное кол-во',
+        verbose_name='Доступное кол-во',
         max_digits=6,
         decimal_places=3,
-        validators=(MinValueValidator(limit_value=0.100),)
+        validators=(MinValueValidator(limit_value=0.000),)
     )
     country = models.ForeignKey(
         Country,

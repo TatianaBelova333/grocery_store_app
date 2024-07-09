@@ -20,6 +20,7 @@ class ShoppingCart(DatesModelMixin):
         verbose_name='Пользователь',
         on_delete=models.CASCADE,
         related_name='shopping_cart',
+        editable=False,
     )
     products = models.ManyToManyField(
         Product,
@@ -34,6 +35,15 @@ class ShoppingCart(DatesModelMixin):
 
     def __str__(self):
         return f'Корзина №{self.id}'
+
+    def is_empty(self):
+        items_count = self.products.count()
+        if items_count == 0:
+            return True
+        return False
+
+    is_empty.short_description = 'Пустая корзина'
+    is_empty.boolean = True
 
 
 class CartItem(models.Model):

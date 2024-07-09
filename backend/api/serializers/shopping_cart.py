@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from django.utils import timezone
 from django.db import DatabaseError, transaction
+from django.db.models import F, Sum
 from rest_framework import serializers
 
 from products.models import Product
@@ -66,12 +67,14 @@ class ProductBriefInfoSerializer(serializers.ModelSerializer):
             'unit',
             'unit_price',
             'discounted_price',
+            'stock_quantity',
         )
 
 
 class CartItemSerializer(serializers.ModelSerializer):
     subtotal = serializers.SerializerMethodField()
     product = ProductBriefInfoSerializer()
+    quantity = serializers.SerializerMethodField()
 
     class Meta:
         model = CartItem
@@ -92,11 +95,19 @@ class CartItemSerializer(serializers.ModelSerializer):
 
         return total_price
 
+    def get_quantity(self, obj):
+        """Check if the product stock quantity is still available."""
+        if obj.product.stock_quantity < obj.quantity:
+            obj.quantity = obj.product.stock_quantity
+            obj.save()
+        return obj.quantity
+
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True)
     total = serializers.DecimalField(max_digits=8, decimal_places=2)
     cart_id = serializers.IntegerField(source='id')
+    total = serializers.SerializerMethodField()
 
     class Meta:
         model = ShoppingCart
@@ -105,3 +116,12 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
             'items',
             'total',
         )
+
+    def get_total(self, cart):
+        cart_with_total = cart.items.aggregate(
+            total=Sum(
+                (F('quantity') * F('product__unit_price')
+                    * (100 - F('product__discount')) / 100)
+                )
+            )
+        return Decimal(cart_with_total['total'])

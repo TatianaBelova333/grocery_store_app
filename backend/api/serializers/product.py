@@ -46,7 +46,9 @@ class ProductSerializer(serializers.ModelSerializer):
     country = serializers.StringRelatedField()
     brand = serializers.StringRelatedField()
     images = ImageSerializer(many=True)
-    qty_in_cart = serializers.DecimalField(max_digits=6, decimal_places=3, required=False)
+    qty_in_cart = serializers.DecimalField(
+        max_digits=6, decimal_places=3, required=False
+    )
 
     class Meta:
         model = Product
