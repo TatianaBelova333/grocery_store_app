@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import DatabaseError, transaction
-from django.db.models import F, Sum
 from django.core.exceptions import ValidationError
 from djoser.conf import settings
 from django.utils import timezone

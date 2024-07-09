@@ -1,4 +1,4 @@
-from django.db.models import Case, F, When, DecimalField, Q, OuterRef
+from django.db.models import Case, F, When, DecimalField, OuterRef
 from django.db import DatabaseError, transaction
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils import timezone
