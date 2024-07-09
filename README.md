@@ -1,7 +1,7 @@
 # grocery_store_app
 ## Grocery store application
-**Часть 1.**<br>
-**part1.py**
+## Часть 1.
+**part1.py**<br>
 Напишите программу, которая выводит n первых элементов последовательности 122333444455555… (число повторяется столько раз, чему оно равно).
 
 ## Часть 2.
@@ -27,23 +27,23 @@
 ### Installation
 
 - Клонировать репозиторий
-  ```
-  git clone https://github.com/TatianaBelova333/grocery_store_app.git
-  ```
+```
+git clone https://github.com/TatianaBelova333/grocery_store_app.git
+```
 - Создать .env файл на основе .env.example.
 
 - Перейти из корня проекта в папку backend:
-  ```
-  cd backend
-  ```
+```
+cd backend
+```
 - Создать и активировать окружение (python3.12):
 
-  ```
-  python3 -m venv env
-  ```
-  ```
-  source env/bin/activate
-  ```
+```
+python3 -m venv env
+```
+```
+source env/bin/activate
+```
 - Установить зависимости
   ```
   pip install -r requirements.txt
@@ -202,7 +202,7 @@ Content-Type: application/json
 
 `GET /api/products/`
 
-Filter by subcategory and subcategory__categories or order by fields unit_price, discount, created
+Filter by `subcategory` and `subcategory__categories` or order by `unit_price`, `discoun`t, `created`
 
 `GET /api/categories/?ordering=-created`
 
@@ -355,8 +355,9 @@ Content-Type: application/json
 
 ```
 ### Add a Product to cart (authorization required)
-`POST /api/products/<pk>/to_cart/`
 ```
+POST /api/products/<pk>/to_cart/
+
 Content-Type: application/json
 {
   "quantity": 10
@@ -369,13 +370,43 @@ HTTP/1.1 200 OK
 
 "Товар добавлен в корзину"
 ```
-`POST /api/products/<pk>/to_cart/`
+
+
 ```
+POST /api/products/<pk>/to_cart/`
+
 Content-Type: application/json
 {
   "quantity": 10.5
 }
 
+```
+
+```
+HTTP/1.1 400 BAD REQUEST
+{
+    "quantity": [
+        "Данный товар продается поштучно. Количество должно быть целым числом."
+    ]
+}
+```
+
+### Change the quantity of Product in cart (authorization required)
+
+```
+PATCH /api/products/<pk>/to_cart/
+
+Content-Type: application/json
+{
+  "quantity": 10
+}
+```
+
+```
+HTTP/1.1 200 OK
+
+"Кол-во товара изменено."
+```
 
 
 ### Get the current user's shopping cart (authorization required).
