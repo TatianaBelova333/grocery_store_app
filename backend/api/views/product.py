@@ -1,4 +1,4 @@
-from django.db.models import Case, F, When, DecimalField, OuterRef
+from django.db.models import Case, F, When, DecimalField, Q, OuterRef
 from django.db import DatabaseError, transaction
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils import timezone
@@ -25,17 +25,20 @@ class ProductViewset(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         current_user = self.request.user
-        if current_user.is_anonymous:
-            user_cart_items = []
-
-        else:
-            user_cart_items = current_user.shopping_cart.items.values(
-                'product'
-            )
 
         queryset = Product.objects.filter(stock_quantity__gt=0).select_related(
             'subcategory', 'country', 'brand'
         ).annotate(
+            discounted_price=F('unit_price') * (100 - F('discount')) / 100
+        )
+
+        if current_user.is_anonymous:
+            return queryset
+
+        user_cart_items = current_user.shopping_cart.items.values(
+                'product'
+            )
+        authorised_user_queryset = queryset.annotate(
             in_cart=Case(
                 When(
                     id__in=user_cart_items,
@@ -43,8 +46,6 @@ class ProductViewset(viewsets.ReadOnlyModelViewSet):
                 ),
                 default=False,
             )
-        ).annotate(
-            discounted_price=F('unit_price') * (100 - F('discount')) / 100
         ).annotate(
             qty_in_cart=Case(
                 When(
@@ -55,9 +56,10 @@ class ProductViewset(viewsets.ReadOnlyModelViewSet):
                 ),
                 default=0.00,
                 output_field=DecimalField()
-            ))
+            )
+        )
 
-        return queryset
+        return authorised_user_queryset
 
     def get_serializer_class(self):
         if self.action == 'to_cart':

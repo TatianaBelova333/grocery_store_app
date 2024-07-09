@@ -40,13 +40,13 @@ class ProductSerializer(serializers.ModelSerializer):
         many=True,
     )
     subcategory = ProductSubCatSerializer()
-    in_cart = serializers.BooleanField()
+    in_cart = serializers.BooleanField(required=False)
     discounted_price = serializers.DecimalField(max_digits=8, decimal_places=2)
     discount = serializers.SerializerMethodField()
     country = serializers.StringRelatedField()
     brand = serializers.StringRelatedField()
     images = ImageSerializer(many=True)
-    qty_in_cart = serializers.DecimalField(max_digits=6, decimal_places=3)
+    qty_in_cart = serializers.DecimalField(max_digits=6, decimal_places=3, required=False)
 
     class Meta:
         model = Product
