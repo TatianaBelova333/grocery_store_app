@@ -1,5 +1,4 @@
-from django.core.exceptions import ValidationError
-from django.db.models import Case, F, When
+from django.db.models import Case, F, When, DecimalField, OuterRef
 from django.db import DatabaseError, transaction
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils import timezone
@@ -25,16 +24,17 @@ class ProductViewset(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ('unit_price', 'discount', 'created')
 
     def get_queryset(self):
-        if self.request.user.is_anonymous:
+        current_user = self.request.user
+        if current_user.is_anonymous:
             user_cart_items = []
 
         else:
-            user_cart_items = self.request.user.shopping_cart.items.values(
+            user_cart_items = current_user.shopping_cart.items.values(
                 'product'
             )
 
-        queryset = Product.objects.filter(quantity__gt=0).select_related(
-            'subcategory',
+        queryset = Product.objects.filter(stock_quantity__gt=0).select_related(
+            'subcategory', 'country', 'brand'
         ).annotate(
             in_cart=Case(
                 When(
@@ -45,7 +45,18 @@ class ProductViewset(viewsets.ReadOnlyModelViewSet):
             )
         ).annotate(
             discounted_price=F('unit_price') * (100 - F('discount')) / 100
-        )
+        ).annotate(
+            qty_in_cart=Case(
+                When(
+                    id__in=user_cart_items,
+                    then=current_user.shopping_cart.items.filter(
+                        product=OuterRef('id')
+                    ).values('quantity')
+                ),
+                default=0.00,
+                output_field=DecimalField()
+            ))
+
         return queryset
 
     def get_serializer_class(self):

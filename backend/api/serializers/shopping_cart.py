@@ -21,7 +21,7 @@ class CartItemCreateUpdateSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id', 'shopping_cart', 'product')
 
-    def validate(self, data):
+    def validate_quantity(self, quantity):
         '''
         Validate that the requested item quantity does not exceed
         the available product quantity.
@@ -30,12 +30,17 @@ class CartItemCreateUpdateSerializer(serializers.ModelSerializer):
         view = self.context['view']
         product_id = view.kwargs['pk']
         product = get_object_or_404(Product, pk=product_id)
-        item_quantity = data['quantity']
-        if product.quantity < item_quantity:
-            raise serializers.ValidationError(
-                    'Товар закончился или отсутствует необходимое количество.'
+        if not product.loose:
+            if Decimal(quantity) != int(quantity):
+                raise serializers.ValidationError(
+                    ('Данный товар продается поштучно. '
+                     'Количество должно быть целым числом.')
                 )
-        return data
+        if product.stock_quantity < quantity:
+            raise serializers.ValidationError(
+                    'Недостаточное количество на складе.'
+                )
+        return quantity
 
     def create(self, validated_data):
         try:
@@ -52,8 +57,21 @@ class CartItemCreateUpdateSerializer(serializers.ModelSerializer):
         return cart_item
 
 
+class ProductBriefInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = (
+            'id',
+            'name',
+            'unit',
+            'unit_price',
+            'discounted_price',
+        )
+
+
 class CartItemSerializer(serializers.ModelSerializer):
     subtotal = serializers.SerializerMethodField()
+    product = ProductBriefInfoSerializer()
 
     class Meta:
         model = CartItem
@@ -78,11 +96,12 @@ class CartItemSerializer(serializers.ModelSerializer):
 class ShoppingCartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True)
     total = serializers.DecimalField(max_digits=8, decimal_places=2)
+    cart_id = serializers.IntegerField(source='id')
 
     class Meta:
         model = ShoppingCart
         fields = (
-            'id',
+            'cart_id',
             'items',
             'total',
         )

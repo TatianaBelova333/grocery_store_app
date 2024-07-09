@@ -1,0 +1,118 @@
+[
+{
+  "model": "category.subcategory",
+  "pk": 1,
+  "fields": {
+    "created": "2024-07-08T17:50:57.166Z",
+    "updated": "2024-07-08T17:50:57.166Z",
+    "name": "Мороженое",
+    "slug": "morozhenoe",
+    "image": "",
+    "categories": [
+      5,
+      8
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 2,
+  "fields": {
+    "created": "2024-07-08T17:51:12.236Z",
+    "updated": "2024-07-08T17:51:12.236Z",
+    "name": "Фрукты",
+    "slug": "fruktyi",
+    "image": "",
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 3,
+  "fields": {
+    "created": "2024-07-08T17:52:20.011Z",
+    "updated": "2024-07-08T17:52:20.011Z",
+    "name": "Йогурты",
+    "slug": "jogurtyi",
+    "image": "",
+    "categories": [
+      10,
+      8
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 4,
+  "fields": {
+    "created": "2024-07-08T17:52:38.592Z",
+    "updated": "2024-07-08T17:52:56.662Z",
+    "name": "Булочки",
+    "slug": "bulochki",
+    "image": "",
+    "categories": [
+      7,
+      3
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 5,
+  "fields": {
+    "created": "2024-07-08T17:53:11.731Z",
+    "updated": "2024-07-08T17:53:11.731Z",
+    "name": "Орехи",
+    "slug": "orehi",
+    "image": "",
+    "categories": [
+      9,
+      2
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 6,
+  "fields": {
+    "created": "2024-07-08T17:53:59.152Z",
+    "updated": "2024-07-08T17:53:59.152Z",
+    "name": "Томаты",
+    "slug": "tomatyi",
+    "image": "",
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 7,
+  "fields": {
+    "created": "2024-07-08T17:54:22.189Z",
+    "updated": "2024-07-08T17:54:22.189Z",
+    "name": "Огурцы",
+    "slug": "ogurtsyi",
+    "image": "",
+    "categories": [
+      4
+    ]
+  }
+},
+{
+  "model": "category.subcategory",
+  "pk": 8,
+  "fields": {
+    "created": "2024-07-08T18:04:14.920Z",
+    "updated": "2024-07-08T18:04:14.921Z",
+    "name": "Свинина",
+    "slug": "svinina",
+    "image": "",
+    "categories": [
+      6
+    ]
+  }
+}
+]

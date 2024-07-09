@@ -1,0 +1,44 @@
+[
+{
+  "model": "products.country",
+  "pk": 1,
+  "fields": {
+    "name": "Россия"
+  }
+},
+{
+  "model": "products.country",
+  "pk": 2,
+  "fields": {
+    "name": "Египет"
+  }
+},
+{
+  "model": "products.country",
+  "pk": 3,
+  "fields": {
+    "name": "США"
+  }
+},
+{
+  "model": "products.country",
+  "pk": 4,
+  "fields": {
+    "name": "Марокко"
+  }
+},
+{
+  "model": "products.country",
+  "pk": 5,
+  "fields": {
+    "name": "Узбекистан"
+  }
+},
+{
+  "model": "products.country",
+  "pk": 6,
+  "fields": {
+    "name": "Польша"
+  }
+}
+]
